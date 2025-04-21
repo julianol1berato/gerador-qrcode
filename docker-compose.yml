@@ -3,6 +3,12 @@ version: '3'
 services:
   app:
     build: .
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.qr.rule=Host(`qr.9level.com.br`)"
+      - "traefik.http.routers.qr.entrypoints=web"
+      - "traefik.http.services.qr.loadbalancer.server.port=80"
+    
     container_name: gerador-qrcode
     ports:
       - "8000:80"
