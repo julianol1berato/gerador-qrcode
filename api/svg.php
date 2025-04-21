@@ -49,12 +49,8 @@ if (empty($pixCopiaECola)) {
 }
 
 try {
-    // Define opções para o SvgWriter
-    $writerOptions = [
-        SvgWriter::WRITER_OPTION_EXCLUDE_XML_DECLARATION => false,
-        SvgWriter::WRITER_OPTION_EXCLUDE_SVG_WIDTH_AND_HEIGHT => false,
-        SvgWriter::WRITER_OPTION_COMPACT => true
-    ];
+    // Define opções para o SvgWriter - versão simplificada sem constantes específicas
+    $writerOptions = [];
 
     // Cria o objeto QR code usando SVG writer
     $result = Builder::create()
