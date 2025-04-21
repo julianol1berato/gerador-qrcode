@@ -35,4 +35,4 @@ RUN mkdir -p /var/www/html/qrcodes && \
     chmod -R 755 /var/www/html/qrcodes
 
 # Expõe a porta 80
-EXPOSE 80
+EXPOSE 12080
