@@ -1,0 +1,96 @@
+/* Estilos para o gerador de QR Code */
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #343a40;
+    font-weight: 700;
+}
+
+header p {
+    color: #6c757d;
+    font-size: 18px;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.tab-content {
+    padding-top: 15px;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.btn-success {
+    padding: 10px 20px;
+    font-weight: 500;
+}
+
+.btn-info {
+    padding: 10px 20px;
+    font-weight: 500;
+    color: white;
+}
+
+#qrResult {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#qrResult img {
+    max-width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #343a40;
+}
+
+/* Responsividade */
+@media (max-width: 767.98px) {
+    .col-md-6:last-child {
+        margin-top: 30px;
+    }
+}
