@@ -1,0 +1,14 @@
+{
+    "name": "seu-nome/gerador-qrcode",
+    "description": "Gerador de QR Code com PHP",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "endroid/qr-code": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
