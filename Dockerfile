@@ -34,5 +34,4 @@ RUN mkdir -p /var/www/html/qrcodes && \
     chown -R www-data:www-data /var/www/html/qrcodes && \
     chmod -R 755 /var/www/html/qrcodes
 
-# Expõe a porta 80
-EXPOSE 12080
+EXPOSE 80
