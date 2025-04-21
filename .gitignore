@@ -1,0 +1,23 @@
+# Composer
+/vendor/
+composer.lock
+
+# Arquivos gerados
+/qrcodes/
+
+# Docker
+/.docker/data/
+
+# Arquivos de ambiente
+.env
+.env.backup
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDE
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
