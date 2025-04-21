@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste API PIX QR Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .btn-pix {
+            background-color: #32BCAD;
+            border-color: #32BCAD;
+            color: white;
+        }
+        .btn-pix:hover {
+            background-color: #2AA99A;
+            border-color: #2AA99A;
+            color: white;
+        }
+        #qrCodeResult {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4 text-center">Teste da API PIX QR Code</h1>
+        
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Gerar QR Code PIX</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="pixForm">
+                            <div class="mb-3">
+                                <label for="pixCopiaECola" class="form-label">Código PIX Copia e Cola:</label>
+                                <textarea class="form-control" id="pixCopiaECola" rows="4" required placeholder="Cole aqui o código PIX 'Copia e Cola'"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-pix">Gerar QR Code PIX</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Resultado</h5>
+                    </div>
+                    <div class="card-body text-center" id="qrCodeResult">
+                        <p class="text-muted">Preencha o formulário e clique em "Gerar QR Code PIX" para ver o resultado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pixForm = document.getElementById('pixForm');
+            const qrCodeResult = document.getElementById('qrCodeResult');
+            
+            pixForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const pixCopiaECola = document.getElementById('pixCopiaECola').value.trim();
+                
+                if (!pixCopiaECola) {
+                    qrCodeResult.innerHTML = '<div class="alert alert-danger">Você precisa informar o código PIX Copia e Cola.</div>';
+                    return;
+                }
+                
+                qrCodeResult.innerHTML = '<p>Gerando QR Code PIX...</p>';
+                
+                // Exemplo usando fetch com método GET
+                fetch(`api/pix.php?pixCopiaECola=${encodeURIComponent(pixCopiaECola)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            qrCodeResult.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                        } else if (data.success) {
+                            qrCodeResult.innerHTML = `
+                                <div class="mb-3">
+                                    <img src="${data.data}" alt="QR Code PIX" class="img-fluid" style="max-width: 250px;">
+                                </div>
+                                <div class="mb-3">
+                                    <a href="${data.file}" download class="btn btn-success mb-2">
+                                        Baixar QR Code
+                                    </a>
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-secondary btn-sm" id="copyPixBtn">
+                                        Copiar código PIX
+                                    </button>
+                                </div>
+                                <div class="mt-2">
+                                    <small class="text-muted">QR Code gerado com sucesso!</small>
+                                </div>
+                            `;
+                            
+                            // Adiciona evento para copiar o código PIX
+                            document.getElementById('copyPixBtn').addEventListener('click', function() {
+                                navigator.clipboard.writeText(data.pixCopiaECola).then(() => {
+                                    this.textContent = 'Copiado!';
+                                    setTimeout(() => {
+                                        this.textContent = 'Copiar código PIX';
+                                    }, 2000);
+                                });
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        qrCodeResult.innerHTML = `<div class="alert alert-danger">Erro ao processar a solicitação: ${error.message}</div>`;
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
