@@ -1,0 +1,22 @@
+# Permite acesso às APIs
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Se o arquivo solicitado não existe
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # E o diretório solicitado não existe
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Redireciona para o endpoint PIX (caso necessário no futuro)
+    # RewriteRule ^pix/?$ pix.php [QSA,L]
+</IfModule>
+
+# Permitir métodos HTTP necessários
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
+# Prevenir listagem de diretórios
+Options -Indexes
