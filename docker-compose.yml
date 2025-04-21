@@ -13,3 +13,8 @@ services:
       # Evita sobrescrever as pastas geradas dentro do container
       - /var/www/html/vendor
       - /var/www/html/qrcodes
+    networks:
+      - traefik-public
+networks:
+  traefik-public:
+    external: true
