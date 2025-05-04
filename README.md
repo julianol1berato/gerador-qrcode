@@ -72,4 +72,4 @@ gerador-qrcode/
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT.
+Este projeto está licenciado sob a [Licença MIT](LICENSE.md).
