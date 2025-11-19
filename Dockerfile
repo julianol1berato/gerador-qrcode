@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install zip
 
 # Instala Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
+#COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=docker.io/library/composer:latest /usr/bin/composer /usr/bin/composer
 # Ativa módulos do Apache
 RUN a2enmod rewrite
 

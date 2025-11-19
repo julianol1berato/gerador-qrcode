@@ -4,8 +4,12 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.qr.rule=Host(`qr.9level.com.br`)"
-      - "traefik.http.routers.qr.entrypoints=web"
+      - "traefik.http.routers.qr.entrypoints=websecure"
       - "traefik.http.services.qr.loadbalancer.server.port=80"
+      - "traefik.http.routers.qr.tls.certresolver=letsencrypt"
+        #- "traefik.http.routers.dashboard.tls.certresolver=letsencrypt-staging"
+      - "traefik.http.routers.qr.middlewares=auth@file,security-headers@file,rate-limit-strict@file"
+        
     container_name: gerador-qrcode
     restart: unless-stopped
     healthcheck:
